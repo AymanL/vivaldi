@@ -15,6 +15,7 @@ import HowToRegIcon from '@material-ui/icons/HowToReg';
 import LiveTvIcon from '@material-ui/icons/LiveTv';
 import Auth from '../../utils/Auth';
 import { asset_url } from '../../utils/Config';
+import AccountBalanceIcon from '@material-ui/icons/AccountBalance';
 
 const LOGO_PATH = asset_url('/images/logo.png')
 const CATEGORIES = [
@@ -81,6 +82,18 @@ const CATEGORIES = [
 			{id: 'Configuration', link: '/admin/tv/config'},
 			{id: 'Média', link: '/admin/tv/media'},
 			{id: 'URL', link: '/admin/tv/url'},
+		]
+	},
+	{
+		id: 'Trésorerie',
+		icon: <AccountBalanceIcon/>,
+		authorized: Auth.isUserAdmin,
+		children: [
+			{id: 'Perms', link: '/admin/treso/perms'},
+			{id: 'Factures', link: '/admin/tv/media'},
+			{id: 'Abaluse TVA', link: '/admin/tv/url'},
+			{id: 'Banque', link: '/admin/tv/url'},
+			{id: 'Archives', link: '/admin/tv/url'},
 		]
 	}
 ];
