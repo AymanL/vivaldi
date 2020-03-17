@@ -119,11 +119,17 @@ class CurrentPerm extends Component{
         let new_article = this.state.new_article;
         ajaxPost('perm/articles/', new_article).then(res => {
             let current_creneau = this.state.current_creneau;
+            this.setState({saving: true})
             current_creneau.article_set.push(res.data);
             new_article.nom = '';
             new_article.stock = '';
             new_article.prix = '';
-            this.setState({current_creneau: current_creneau, new_article: new_article, invoice_checked: false})
+            this.setState({
+                current_creneau: current_creneau,
+                new_article: new_article,
+                invoice_checked: false,
+                saving: false
+            })
         })
         .catch(error => {
             console.log(error);
