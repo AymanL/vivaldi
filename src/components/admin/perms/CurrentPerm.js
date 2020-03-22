@@ -33,12 +33,14 @@ class CurrentPerm extends Component{
                 creneau: '',
             },
             invoice_checked: false,
+            saving: true
         }
 
         this.addArticleToPayutc = this.addArticleToPayutc.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.handleCheckChange = this.handleCheckChange.bind(this);
         this.saveArticle = this.saveArticle.bind(this);
+        this.changeSavingState = this.changeSavingState.bind(this);
     }
 
     componentDidMount(){
@@ -114,12 +116,16 @@ class CurrentPerm extends Component{
         window.open(asset_url("/menu?selected_article=" + article.id));
     }
 
+    changeSavingState(){
+        let initial_state = this.state.saving ;
+        this.setState({ saving: !initial_state })
+    }
 
     saveArticle(){
         let new_article = this.state.new_article;
+        this.changeSavingState();
         ajaxPost('perm/articles/', new_article).then(res => {
             let current_creneau = this.state.current_creneau;
-            this.setState({saving: true})
             current_creneau.article_set.push(res.data);
             new_article.nom = '';
             new_article.stock = '';
@@ -128,11 +134,12 @@ class CurrentPerm extends Component{
                 current_creneau: current_creneau,
                 new_article: new_article,
                 invoice_checked: false,
-                saving: false
+                saving: true
             })
         })
         .catch(error => {
             console.log(error);
+            this.setState({ saving: true })
         })
     }
 
@@ -394,6 +401,7 @@ class CurrentPerm extends Component{
                                     color="primary"
                                     className={classes.saving_btn} 
                                     onClick={this.saveArticle}
+                                    disabled={!this.state.saving}
                                 >
                                     Ajouter
                                 </Button>
