@@ -1,6 +1,6 @@
 export async function getProductsList(){
 
-    //Get datas from API
+    //Get datas from API (check w/ Momo & gauti)
     const result = [
         {
             id: 1,
