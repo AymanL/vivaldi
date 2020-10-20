@@ -1,8 +1,5 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import { CssBaseline } from '@material-ui/core';
-
-import './App.css';
 
 import Home from './pages/Home';
 import Admin from './pages/Admin';
@@ -16,6 +13,18 @@ import Poll from './pages/Poll';
 import PermForm from './pages/PermForm';
 import Badge from './pages/Badge';
 
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { fab } from '@fortawesome/free-brands-svg-icons';
+import { faCheckSquare, faCoffee, faGamepad, faChessKnight, faUserGraduate, faBed, faBeer, faPaw, faBrain, faArrowRight, faCheck, faLock} from '@fortawesome/free-solid-svg-icons';
+
+// Import Scss
+import "./theme.scss";
+
+//Import Icon Css
+import "./assets/css/materialdesignicons.min.css";
+library.add(fab, faCheckSquare, faCoffee, faGamepad, faChessKnight, faUserGraduate, faBed, faBeer, faPaw, faBrain, faArrowRight, faCheck, faLock)
+
+
 React.lazy(() => import('./pages/Admin'))
 
 const PUBLIC_URL = process.env.PUBLIC_URL;
@@ -24,7 +33,6 @@ class App extends React.Component {
 	render() {
 		return (
 			<BrowserRouter basename={PUBLIC_URL}>
-				<CssBaseline />
 				<React.Suspense fallback={<div>Loading</div>}>
 
 				<Switch>
